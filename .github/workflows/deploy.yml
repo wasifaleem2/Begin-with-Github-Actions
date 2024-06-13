@@ -22,6 +22,7 @@ jobs:
         run: npm install
 
       - name: Build
+        working-directory: ./ # for netlify
         run: |
           npm run build  # Generates the `build` directory
           ls -l build  # List contents of the build directory
