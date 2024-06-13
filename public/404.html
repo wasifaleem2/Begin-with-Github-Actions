@@ -3,13 +3,18 @@
   <head>
     <meta http-equiv="refresh" content="0; url=/Begin-with-Github-Actions/">
     <script type="text/javascript">
-      // Redirect to the root of the project, preserving the path
-      var path = window.location.pathname.replace('/Begin-with-Github-Actions', '');
-      var query = window.location.search;
-      var hash = window.location.hash;
-      var newPath = '/Begin-with-Github-Actions' + path + query + hash;
-      window.history.replaceState(null, null, newPath);
-      window.location.replace(window.location.origin + '/Begin-with-Github-Actions' + path + query + hash);
+      (function() {
+        var path = window.location.pathname;
+        var query = window.location.search;
+        var hash = window.location.hash;
+        
+        // Check if the current page is not index.html to avoid infinite loop
+        if (!path.includes('index.html')) {
+          var newPath = '/Begin-with-Github-Actions' + path + query + hash;
+          window.history.replaceState(null, null, newPath);
+          window.location.replace(window.location.origin + '/Begin-with-Github-Actions' + path + query + hash);
+        }
+      })();
     </script>
   </head>
   <body>
