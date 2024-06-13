@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="refresh" content="0; url=./index.html">
+    <script type="text/javascript">
+      // Redirect to the index.html but retain the original path and query parameters
+      var path = window.location.pathname;
+      var origin = window.location.origin;
+      var newPath = origin + '/Begin-with-Github-Actions' + path + window.location.search;
+      window.location.replace(newPath);
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
