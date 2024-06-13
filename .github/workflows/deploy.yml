@@ -60,10 +60,10 @@ jobs:
 
       # Deploy to Netlify
       - name: Deploy to Netlify
-        if: success()  # Deploy only if previous steps (build) were successful
+        if: success()
         env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }} # Add your Netlify auth token as a secret
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }} # Add your Netlify site ID as a secret
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         run: |
-          npm install netlify-cli -g
-          netlify deploy --prod --dir=build --auth=$NETLIFY_AUTH_TOKEN --site=$NETLIFY_SITE_ID
+          npm run build # Ensure build is run again before deploying
+          npx netlify build --prod
