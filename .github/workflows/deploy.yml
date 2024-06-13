@@ -16,13 +16,13 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18.12.1'
+          node-version: '14'  # Adjust Node.js version as needed
 
       - name: Install dependencies
         run: npm install
 
       - name: Build
-        run: npm run build
+        run: npm run build  # Ensure this generates the `build` directory
 
       - name: Deploy to GitHub Pages
         run: |
@@ -31,9 +31,8 @@ jobs:
 
           git checkout --orphan gh-pages
           git rm -rf .
-          git checkout main -- build  # Replace `main` with your main branch name if different
-          mv -f build/* .
-          rm -rf build
+          mv -f ../build/* .
+          rm -rf ../build
           git add -A
           git commit -m "Deployed using GitHub Actions"
           git push -f origin gh-pages
