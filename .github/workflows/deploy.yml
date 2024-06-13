@@ -26,6 +26,15 @@ jobs:
         working-directory: ./ # for netlify
         run: npm run build
 
+        # Deploy to Netlify
+      - name: Deploy to Netlify
+        if: success()
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          run: netlify deploy --prod
+
       - name: Deploy to GitHub Pages
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }} # add name of secret you created in place of GH_TOKEN
@@ -53,15 +62,5 @@ jobs:
 
           # Push the changes to the gh-pages branch
           git push -f origin gh-pages
-      # checkout to main for netlify
-      - name: Git Checkout main
-        run: git checkout main
-      # Deploy to Netlify
-      - name: Deploy to Netlify
-        if: success()
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        run: |
-          npm run build # Ensure build is run again before deploying
-          npx netlify build --prod
+      
+      
