@@ -53,7 +53,9 @@ jobs:
 
           # Push the changes to the gh-pages branch
           git push -f origin gh-pages
-
+      # checkout to main for netlify
+      - name: Git Checkout main
+        run: git checkout main
       # Deploy to Netlify
       - name: Deploy to Netlify
         if: success()
