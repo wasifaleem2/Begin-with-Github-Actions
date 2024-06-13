@@ -1,4 +1,3 @@
-# .github/workflows/deploy.yml
 name: Deploy to GitHub Pages
 
 on:
@@ -16,13 +15,13 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'  # Adjust Node.js version as needed
+          node-version: '14'
 
       - name: Install dependencies
         run: npm install
 
       - name: Build
-        run: npm run build  # Ensure this generates the `build` directory
+        run: npm run build  # Generates the `build` directory
 
       - name: Deploy to GitHub Pages
         run: |
@@ -31,8 +30,7 @@ jobs:
 
           git checkout --orphan gh-pages
           git rm -rf .
-          mv -f ../build/* .
-          rm -rf ../build
+          mv -f build/* .
           git add -A
           git commit -m "Deployed using GitHub Actions"
           git push -f origin gh-pages
