@@ -28,12 +28,12 @@ jobs:
 
         # Deploy to Netlify
       - name: Deploy to Netlify
-        if: success()
+        if: success()  # Only deploy to Netlify if build is successful
         env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}  # Netlify authentication token
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}  # Netlify site ID
         run: |
-          run: netlify deploy --prod
+          npx netlify deploy --prod  # Deploy to Netlify production environment
 
       - name: Deploy to GitHub Pages
         env:
