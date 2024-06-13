@@ -3,9 +3,10 @@
   <head>
     <meta http-equiv="refresh" content="0; url=/Begin-with-Github-Actions/">
     <script type="text/javascript">
+      // Prevent infinite loop by checking if the path is not the base path
       (function() {
         var pathname = window.location.pathname;
-        if (pathname !== '/Begin-with-Github-Actions/' && !pathname.startsWith('/Begin-with-Github-Actions/index.html')) {
+        if (!pathname.startsWith('/Begin-with-Github-Actions/')) {
           var newPath = '/Begin-with-Github-Actions' + pathname;
           var query = window.location.search;
           var hash = window.location.hash;
