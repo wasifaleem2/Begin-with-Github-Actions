@@ -22,7 +22,13 @@ jobs:
         run: npm install
 
       - name: Build
-        run: npm run build  # Generates the `build` directory
+        run: |
+          npm run build  # Generates the `build` directory
+          ls -l build  # List contents of the build directory
+          if [ ! -d "build" ]; then
+            echo "Error: Build directory not found"
+            exit 1
+          fi
 
       - name: Deploy to GitHub Pages
         env:
@@ -54,9 +60,10 @@ jobs:
 
       # Deploy to Netlify
       - name: Deploy to Netlify
+        if: success()  # Deploy only if previous steps (build) were successful
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }} # Add your Netlify auth token as a secret
-          NETLIFY_SITE_ID: e8b87ccf-b1d7-4d52-bd59-985ece4e4013 # Replace with your actual Netlify site ID
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }} # Add your Netlify site ID as a secret
         run: |
           npm install netlify-cli -g
           netlify deploy --prod --dir=build --auth=$NETLIFY_AUTH_TOKEN --site=$NETLIFY_SITE_ID
