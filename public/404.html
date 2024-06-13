@@ -3,16 +3,15 @@
   <head>
     <meta http-equiv="refresh" content="0; url=/Begin-with-Github-Actions/">
     <script type="text/javascript">
+      // Prevent infinite loop by checking if the path is not the base path
       (function() {
-        var path = window.location.pathname;
-        var query = window.location.search;
-        var hash = window.location.hash;
-        
-        // Check if the current page is not index.html to avoid infinite loop
-        if (!path.includes('index.html')) {
-          var newPath = '/Begin-with-Github-Actions' + path + query + hash;
-          window.history.replaceState(null, null, newPath);
-          window.location.replace(window.location.origin + '/Begin-with-Github-Actions' + path + query + hash);
+        var pathname = window.location.pathname;
+        if (!pathname.startsWith('/Begin-with-Github-Actions/')) {
+          var newPath = '/Begin-with-Github-Actions' + pathname;
+          var query = window.location.search;
+          var hash = window.location.hash;
+          window.history.replaceState(null, null, newPath + query + hash);
+          window.location.replace(window.location.origin + newPath + query + hash);
         }
       })();
     </script>
