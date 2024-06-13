@@ -19,6 +19,7 @@ jobs:
           node-version: '18.12.1' # add the node version
 
       - name: Install dependencies
+        working-directory: ./  # for netlify Set the working directory to project root
         run: npm install
 
       - name: Build
