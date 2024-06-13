@@ -24,13 +24,7 @@ jobs:
 
       - name: Build
         working-directory: ./ # for netlify
-        run: |
-          npm run build  # Generates the `build` directory
-          ls -l build  # List contents of the build directory
-          if [ ! -d "build" ]; then
-            echo "Error: Build directory not found"
-            exit 1
-          fi
+        run: npm run build
 
       - name: Deploy to GitHub Pages
         env:
