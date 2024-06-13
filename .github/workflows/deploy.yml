@@ -8,6 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -15,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '18.12.1'
 
       - name: Install dependencies
         run: npm install
@@ -24,13 +25,30 @@ jobs:
         run: npm run build  # Generates the `build` directory
 
       - name: Deploy to GitHub Pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           git config --global user.email "actions@users.noreply.github.com"
           git config --global user.name "GitHub Actions"
 
+          # Initialize a new branch for deployment
           git checkout --orphan gh-pages
+
+          # Remove all files in the current directory
           git rm -rf .
+
+          # Move built files to the root of the gh-pages branch
           mv -f build/* .
+
+          # Remove the build directory
+          rm -rf build
+
+          # Add all files to git
           git add -A
+
+          # Commit the changes
           git commit -m "Deployed using GitHub Actions"
-          git push -f origin gh-pages
+
+          # Push the changes to the gh-pages branch
+          git remote add origin-with-token "https://${{ secrets.GH_TOKEN }}@github.com/wasifaleem2/Begin-with-Github-Actions.git"
+          git push -f origin-with-token gh-pages
