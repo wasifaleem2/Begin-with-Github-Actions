@@ -50,5 +50,4 @@ jobs:
           git commit -m "Deployed using GitHub Actions"
 
           # Push the changes to the gh-pages branch
-          git remote add origin-with-token "https://${{ secrets.GH_TOKEN }}@github.com/wasifaleem2/Begin-with-Github-Actions.git"
-          git push -f origin-with-token gh-pages
+          git push -f origin gh-pages
