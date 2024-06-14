@@ -19,11 +19,9 @@ jobs:
           node-version: '18.12.1' # add the node version
 
       - name: Install dependencies
-        # working-directory: ./  # for netlify Set the working directory to project root
         run: npm install
 
       - name: Build
-        #working-directory: ./ # for netlify
         run: npm run build
 
         # Deploy to Netlify
@@ -33,6 +31,7 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
 
+        # deploy to github pages
       - name: Deploy to GitHub Pages
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }} # add name of secret you created in place of GH_TOKEN
