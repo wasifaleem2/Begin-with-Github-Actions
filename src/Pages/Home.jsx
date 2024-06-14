@@ -3,7 +3,7 @@ function Home() {
   return (
     <>
       <h1 style={{ color: "navy" }}>Home Page</h1>
-      <p>Version 1.5</p>
+      <p>Version 1.6</p>
     </>
   );
 }
