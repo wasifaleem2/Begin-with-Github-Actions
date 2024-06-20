@@ -1,6 +1,5 @@
 {
   "name": "forgithubactions",
-  "homepage": "http://wasifaleem2.github.io/Begin-with-Github-Actions",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
